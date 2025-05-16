@@ -1,10 +1,28 @@
-modules = ["go", "golang-1.21"]
+modules = ["go", "golang-1.21", "golang-1.20"]
 
 [nix]
 channel = "stable-24_05"
 packages = ["go_1_22"]
 
 [workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "test-progress"
+
+[[workflows.workflow]]
+name = "test-progress"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run test_progress.go"
 
 [deployment]
 run = ["sh", "-c", "go mod init github.com/dotpilot && go mod tidy && go get github.com/spf13/cobra github.com/rs/zerolog github.com/go-git/go-git/v5 && go build -o dotpilot && ./dotpilot --help"]
