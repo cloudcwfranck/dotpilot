@@ -13,14 +13,60 @@ DotPilot is a cross-platform CLI tool for managing and syncing dotfiles across m
 
 ## Installation
 
+### Prerequisites
+
+- Go 1.20 or later
+- Git
+- For SOPS encryption: GPG and Mozilla SOPS
+
+### From Source
+
 1. Clone this repository
-2. Build the binary with Go:
+   ```bash
+   git clone https://github.com/yourusername/dotpilot.git
+   cd dotpilot
    ```
+
+2. Build the binary with Go:
+   ```bash
    go build -o dotpilot
    ```
+
 3. Move the binary to a location in your PATH:
+   ```bash
+   # Linux/macOS
+   sudo mv dotpilot /usr/local/bin/
+   
+   # Windows (run in PowerShell as Administrator)
+   # Move to a directory in your PATH
    ```
-   mv dotpilot /usr/local/bin/
+
+4. Verify installation:
+   ```bash
+   dotpilot --version
+   ```
+
+### Development Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/dotpilot.git
+   cd dotpilot
+   ```
+
+2. Install dependencies:
+   ```bash
+   go mod download
+   ```
+
+3. Test the progress indicators:
+   ```bash
+   go run test_progress.go
+   ```
+
+4. Run the full test suite:
+   ```bash
+   go test ./...
    ```
 
 ## Usage
@@ -213,6 +259,9 @@ dotpilot sync --no-progress
 # Progress indicators are also available for SOPS operations
 dotpilot sops add ~/.aws/credentials
 dotpilot sops get credentials ~/.aws/credentials
+
+# Test the progress indicators
+dotpilot test progress
 ```
 
 The progress indicators provide real-time visual feedback for:
@@ -221,6 +270,26 @@ The progress indicators provide real-time visual feedback for:
 - Encryption and decryption
 - Conflict resolution
 - Configuration application
+
+#### Progress Indicator Types
+
+DotPilot implements four styles of animated progress indicators:
+
+1. **Spinner**: A rotating animation that spins continuously
+   - Best for: Operations with unknown completion time
+   - Used in: Commit operations, hooks execution
+
+2. **Bar**: A horizontal bar that fills from left to right
+   - Best for: Operations with measurable progress
+   - Used in: Configuration application, file sync operations
+
+3. **Bounce**: A dot that bounces back and forth 
+   - Best for: Network operations
+   - Used in: Git pull/push operations
+
+4. **Dots**: Text followed by animated dots
+   - Best for: Encryption/decryption operations
+   - Used in: SOPS file processing
 
 ### Conflict Resolution
 

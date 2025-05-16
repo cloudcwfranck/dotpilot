@@ -8,9 +8,10 @@ import (
 
         "github.com/dotpilot/utils"
         "github.com/go-git/go-git/v5"
+        "github.com/go-git/go-git/v5/config"
         "github.com/go-git/go-git/v5/plumbing"
         "github.com/go-git/go-git/v5/plumbing/object"
-        // "github.com/go-git/go-git/v5/plumbing/transport/http"
+        "github.com/go-git/go-git/v5/plumbing/transport/http"
 )
 
 // RemoteStatus represents the status of the local repository compared to the remote
@@ -50,7 +51,7 @@ func InitializeRepo(remoteURL, dotpilotDir, environment string) error {
                         createDirStructure(dotpilotDir)
 
                         // Add remote
-                        _, err = repo.CreateRemote(&git.RemoteConfig{
+                        _, err = repo.CreateRemote(&config.RemoteConfig{
                                 Name: "origin",
                                 URLs: []string{remoteURL},
                         })
