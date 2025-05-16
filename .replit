@@ -24,6 +24,14 @@ args = "dotpilot-demo"
 task = "workflow.run"
 args = "test-all-styles"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "bootstrap-demo"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "cli-demo"
+
 [[workflows.workflow]]
 name = "test-progress"
 author = "agent"
@@ -47,6 +55,22 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "go run examples/test_indicators/all_styles/main.go"
+
+[[workflows.workflow]]
+name = "bootstrap-demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run examples/bootstrap_demo/main.go"
+
+[[workflows.workflow]]
+name = "cli-demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run examples/cli_demo/main.go"
 
 [deployment]
 run = ["sh", "-c", "go mod init github.com/dotpilot && go mod tidy && go get github.com/spf13/cobra github.com/rs/zerolog github.com/go-git/go-git/v5 && go build -o dotpilot && ./dotpilot --help"]

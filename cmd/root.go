@@ -54,6 +54,7 @@ func init() {
         rootCmd.AddCommand(initCmd)
         rootCmd.AddCommand(trackCmd)
         rootCmd.AddCommand(syncCmd)
+        rootCmd.AddCommand(bootstrapCmd)
         rootCmd.AddCommand(statusCmd)
 }
 

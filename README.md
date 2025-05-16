@@ -145,6 +145,30 @@ dotpilot sync --no-backup --no-diff-prompt
 dotpilot sync --resolve-conflicts --strategy=interactive
 ```
 
+### Bootstrap a Machine
+
+To apply dotfiles and run setup scripts on a new machine:
+
+```bash
+# Apply all dotfiles and run setup scripts
+dotpilot bootstrap
+
+# Skip common dotfiles
+dotpilot bootstrap --skip-common
+
+# Skip environment-specific dotfiles
+dotpilot bootstrap --skip-env
+
+# Skip machine-specific dotfiles
+dotpilot bootstrap --skip-machine
+
+# Skip setup scripts
+dotpilot bootstrap --skip-setup-scripts
+
+# Force overwrite existing files
+dotpilot bootstrap --force
+```
+
 ## Resolve Conflicts
 
 To detect and resolve conflicts between local files and tracked dotfiles:
