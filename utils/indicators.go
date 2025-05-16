@@ -27,22 +27,6 @@ const (
         Rainbow
 )
 
-// ProgressState defines the different states a progress indicator can be in
-type ProgressState int
-
-const (
-        // Normal is the default state
-        Normal ProgressState = iota
-        // Success indicates a successful operation
-        Success
-        // Warning indicates an operation that completed with warnings
-        Warning
-        // Error indicates a failed operation
-        Error
-        // Info indicates an informational state
-        Info
-)
-
 // ProgressIndicator represents an animated progress indicator
 type ProgressIndicator struct {
         message     string
