@@ -97,9 +97,25 @@ func (p *ProgressIndicator) Stop() {
 }
 
 // UpdateProgress updates the progress percentage (mainly for Bar style)
-func (p *ProgressIndicator) UpdateProgress(percent int) {
+// This method can be called with either UpdateProgress(percent) or UpdateProgress(current, total)
+func (p *ProgressIndicator) UpdateProgress(args ...int) {
         p.mutex.Lock()
         defer p.mutex.Unlock()
+        
+        var percent int
+        
+        if len(args) == 1 {
+                // Called with just percentage
+                percent = args[0]
+        } else if len(args) >= 2 {
+                // Called with current and total
+                current := args[0]
+                total := args[1]
+                
+                if total > 0 {
+                        percent = (current * 100) / total
+                }
+        }
         
         if percent < 0 {
                 percent = 0

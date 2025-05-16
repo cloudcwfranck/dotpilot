@@ -59,13 +59,25 @@ DotPilot is a cross-platform CLI tool for managing and syncing dotfiles across m
    go mod download
    ```
 
-3. Test the progress indicators:
+3. Test the progress indicators and demos:
    ```bash
-   # Run the simple progress indicator test
-   go run test_progress.go
+   # Run the basic progress indicator test
+   go run examples/test_indicators/basic/main.go
    
-   # Run the comprehensive demo (great for recording a demo GIF)
-   go run demo.go
+   # Run the test with all progress indicator styles
+   go run examples/test_indicators/all_styles/main.go
+   
+   # Run the CLI command demo
+   go run examples/cli_demo/main.go
+   
+   # Run the bootstrap command demo
+   go run examples/bootstrap_demo/main.go
+   
+   # Run the DotPilot operations demo
+   go run examples/progress_demo/dotpilot_demo.go
+   
+   # Run the real-world usage demo (great for recording a demo GIF)
+   go run examples/real_world_demo/main.go
    ```
 
 4. Run the test suite:
@@ -317,23 +329,44 @@ The progress indicators provide real-time visual feedback for:
 
 #### Progress Indicator Types
 
-DotPilot implements four styles of animated progress indicators:
+DotPilot implements six styles of animated progress indicators:
 
 1. **Spinner**: A rotating animation that spins continuously
    - Best for: Operations with unknown completion time
    - Used in: Commit operations, hooks execution
+   - Example: `⠋ Processing data...`
 
 2. **Bar**: A horizontal bar that fills from left to right
    - Best for: Operations with measurable progress
    - Used in: Configuration application, file sync operations
+   - Example: `[==========>     ] Downloading files 67%`
 
 3. **Bounce**: A dot that bounces back and forth 
    - Best for: Network operations
    - Used in: Git pull/push operations
+   - Example: `[       ⚫        ] Synchronizing...`
 
 4. **Dots**: Text followed by animated dots
    - Best for: Encryption/decryption operations
    - Used in: SOPS file processing
+   - Example: `Loading... ⣿⣿⣿⣿⣄`
+
+5. **Pulse**: A pulsing animation that grows and shrinks
+   - Best for: Background processing operations
+   - Used in: Setup scripts, file scanning
+   - Example: `◇◈◆◈◇ Encrypting files...`
+
+6. **Rainbow**: A color-shifting animation
+   - Best for: Critical or important operations
+   - Used in: Sensitive operations like security checks
+   - Example: `◆ Processing critical data` (with rainbow colors)
+
+Each indicator style also supports different states with color-coding:
+- **Normal**: Default state (cyan/blue)
+- **Success**: Operation completed successfully (green)
+- **Warning**: Operation completed with warnings (yellow)
+- **Error**: Operation failed (red)
+- **Info**: Informational status (blue)
 
 ### Conflict Resolution
 

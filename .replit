@@ -32,6 +32,10 @@ args = "bootstrap-demo"
 task = "workflow.run"
 args = "cli-demo"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "real-world-demo"
+
 [[workflows.workflow]]
 name = "test-progress"
 author = "agent"
@@ -71,6 +75,14 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "go run examples/cli_demo/main.go"
+
+[[workflows.workflow]]
+name = "real-world-demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run examples/real_world_demo/main.go"
 
 [deployment]
 run = ["sh", "-c", "go mod init github.com/dotpilot && go mod tidy && go get github.com/spf13/cobra github.com/rs/zerolog github.com/go-git/go-git/v5 && go build -o dotpilot && ./dotpilot --help"]

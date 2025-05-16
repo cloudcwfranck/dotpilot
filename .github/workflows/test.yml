@@ -22,7 +22,10 @@ jobs:
 
     - name: Test
       run: go test -v ./...
-
-    # This test file has been moved to examples directory and is now part of the main tests
-    # - name: Run Test Progress Demo
-    #  run: go run examples/test_indicators/test_progress.go
+      
+    # Test the progress indicators in the examples directory
+    - name: Test Basic Progress Indicators
+      run: go run examples/test_indicators/basic/main.go
+      
+    - name: Test All Progress Indicator Styles
+      run: go run examples/test_indicators/all_styles/main.go
