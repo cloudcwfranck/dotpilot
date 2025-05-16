@@ -1,0 +1,29 @@
+Build a cross-platform CLI tool called dotpilot to manage and sync dotfiles across multiple machines with environment-specific overrides. The tool should be written in either Rust or Go, with a Git-backed system that tracks changes to dotfiles, supports scoped environments (e.g., dev, prod, hardened), and includes machine-specific configurations.
+
+Core Requirements:
+	1.	Track dotfiles: Ability to track specified files and directories (e.g., ~/.zshrc, ~/.config/nvim) in a hidden Git repo (~/.dotpilot).
+	2.	Git integration: Auto-commit changes and push/pull to a remote Git repo. Warn if working directory is dirty before pull.
+	3.	Scoped environments: Support common, envs/{env}, and machine/{hostname} config folders. Apply them in this order:
+	•	common/
+	•	envs/{selected_env}/
+	•	machine/{hostname}/
+	4.	Bootstrap command: dotpilot init --remote <repo> --env <env> clones dotfiles, sets up configs, installs packages, and runs setup hooks.
+	5.	Pre/post hooks: Support shell scripts like preinstall.sh, postpull.sh, install_packages.sh to automate system setup.
+	6.	Package manager hooks:
+	•	Detect OS (macOS, Ubuntu, Arch)
+	•	Run package installs from environment-specific lists (packages.brew, packages.apt, packages.yay)
+	7.	Safe sync: Auto-backup changed files before overwriting; show diffs and prompt before dangerous merges.
+
+Bonus Features (Optional for MVP):
+	•	Encrypted secrets handling (sops/gpg)
+	•	CLI auto-completion and help (--help, dotpilot track, dotpilot sync)
+	•	Clean logging with levels: info, warning, error
+	•	TUI frontend using Bubbletea (if using Go)
+
+Deliverables:
+	•	CLI binary (dotpilot)
+	•	Sample dotfiles repo structure for testing
+	•	README with install instructions and usage examples
+	•	Config file: .dotpilotrc (JSON or TOML for local config, avoid YAML)
+
+Do not use any YAML-based configuration systems. Keep the tool minimal and portable, optimized for developer experience. Treat this like a fusion of chezmoi, gh, and a lightweight ansible—with no overhead or complexity.
