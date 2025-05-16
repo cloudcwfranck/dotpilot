@@ -16,13 +16,25 @@ author = "agent"
 task = "workflow.run"
 args = "test-progress"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "dotpilot-demo"
+
 [[workflows.workflow]]
 name = "test-progress"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "go run test_progress.go"
+args = "go run examples/test_indicators/test_progress.go"
+
+[[workflows.workflow]]
+name = "dotpilot-demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run examples/progress_demo/dotpilot_demo.go"
 
 [deployment]
 run = ["sh", "-c", "go mod init github.com/dotpilot && go mod tidy && go get github.com/spf13/cobra github.com/rs/zerolog github.com/go-git/go-git/v5 && go build -o dotpilot && ./dotpilot --help"]
