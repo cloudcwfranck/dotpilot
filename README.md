@@ -134,7 +134,11 @@ DotPilot uses the following special files:
 
 ## Secrets Management
 
-DotPilot can securely store sensitive configuration files using encryption:
+DotPilot offers two methods for securely storing sensitive configuration files:
+
+### Basic Encryption
+
+Simple encryption for sensitive files:
 
 ```bash
 # Add a file as an encrypted secret
@@ -155,7 +159,68 @@ dotpilot secrets remove aws_credentials
 
 DotPilot will use GPG if available on your system, or fall back to AES-256 encryption if GPG is not available.
 
+### Advanced SOPS/GPG Integration
+
+For enhanced security with Mozilla SOPS and GPG:
+
+```bash
+# Add a file with SOPS encryption
+dotpilot sops add ~/.aws/credentials
+
+# Add with custom name
+dotpilot sops add ~/.ssh/id_rsa --name ssh_key
+
+# Add and immediately edit the encrypted file
+dotpilot sops add ~/.npmrc --edit
+
+# List SOPS encrypted secrets
+dotpilot sops list
+
+# Decrypt and retrieve a secret
+dotpilot sops get aws_credentials ~/.aws/credentials
+
+# Edit an encrypted secret directly
+dotpilot sops edit aws_credentials
+
+# Remove a SOPS secret
+dotpilot sops remove aws_credentials
+```
+
+The SOPS integration offers several advantages:
+- In-place editing of encrypted files
+- Compatible with Mozilla SOPS CLI tool
+- Uses your GPG keys for strong encryption
+- Human-readable encrypted files (JSON format)
+- Supports team-based secret sharing when using multiple GPG keys
+
+Requirements:
+- GPG must be installed with a key generated
+- SOPS must be installed (https://github.com/mozilla/sops)
+
 ## Advanced Features
+
+### Animated Progress Indicators
+
+DotPilot provides animated progress indicators for long-running operations:
+
+```bash
+# Normal sync with animated progress
+dotpilot sync
+
+# Disable animated progress if needed
+dotpilot sync --no-progress
+
+# Progress indicators are also available for SOPS operations
+dotpilot sops add ~/.aws/credentials
+dotpilot sops get credentials ~/.aws/credentials
+```
+
+The progress indicators provide real-time visual feedback for:
+- Git operations (pull, push, commit)
+- File sync operations
+- Encryption and decryption
+- Conflict resolution
+- Configuration application
 
 ### Conflict Resolution
 
@@ -168,6 +233,31 @@ DotPilot provides advanced conflict resolution strategies for handling file conf
 - `backup-both`: Keep both versions
 
 This helps to safely handle conflicting changes that might occur when syncing across multiple machines.
+
+## Shell Completion
+
+DotPilot provides smart command-line completion for various shells to enhance productivity:
+
+```bash
+# Generate bash completion
+dotpilot completion bash > ~/.bash_completion.d/dotpilot
+
+# Generate zsh completion
+dotpilot completion zsh > "${fpath[1]}/_dotpilot"
+
+# Generate fish completion
+dotpilot completion fish > ~/.config/fish/completions/dotpilot.fish
+
+# Generate PowerShell completion
+dotpilot completion powershell > dotpilot.ps1
+```
+
+This enables context-aware completion for:
+- File paths when tracking files
+- Available environments
+- Conflict resolution strategies
+- Secret names when accessing encrypted secrets
+- Package management systems
 
 ## License
 
