@@ -1,0 +1,41 @@
+Run go test -v ./...
+# github.com/dotpilot
+Error: ./main.go:10:6: main redeclared in this block
+Error: 	./dotpilot_demo.go:11:6: other declaration of main
+Error: ./test_progress.go:23:6: main redeclared in this block
+Error: 	./dotpilot_demo.go:11:6: other declaration of main
+FAIL	github.com/dotpilot [build failed]
+?   	github.com/dotpilot/cmd	[no test files]
+=== RUN   TestDotpilotSanity
+    core_test.go:9: DotPilot test running successfully
+--- PASS: TestDotpilotSanity (0.00s)
+PASS
+ok  	github.com/dotpilot/core	0.004s
+=== RUN   TestProgressIndicatorTypes
+=== RUN   TestProgressIndicatorTypes/Spinner
+    progress_test.go:58: Spinner indicator output: "\r⠋ Testing Spinner\r⠙ Testing Spinner\r                                                                                \r"
+=== RUN   TestProgressIndicatorTypes/Bar
+    progress_test.go:58: Bar indicator output: "\r[==========          ] Testing Bar 50%\r[==========          ] Testing Bar 50%\r                                                                                \r"
+=== RUN   TestProgressIndicatorTypes/Bounce
+    progress_test.go:58: Bounce indicator output: "\r[⚫                   ] Testing Bounce\r[ ⚫                  ] Testing Bounce\r                                                                                \r"
+=== RUN   TestProgressIndicatorTypes/Dots
+    progress_test.go:58: Dots indicator output: "\rTesting Dots     \r                                                                                \r"
+--- PASS: TestProgressIndicatorTypes (0.90s)
+    --- PASS: TestProgressIndicatorTypes/Spinner (0.20s)
+    --- PASS: TestProgressIndicatorTypes/Bar (0.20s)
+    --- PASS: TestProgressIndicatorTypes/Bounce (0.20s)
+    --- PASS: TestProgressIndicatorTypes/Dots (0.30s)
+=== RUN   TestOperationManager
+
+⠋ Test Operation 1
+[                    ] Test Operation 2 0%
+[                    ] Test Operation 2 0%
+                                                                                
+
+                                                                                
+    progress_test.go:85: Operation manager test completed successfully
+--- PASS: TestOperationManager (0.20s)
+PASS
+ok  	github.com/dotpilot/utils	1.106s
+FAIL
+Error: Process completed with exit code 1.
