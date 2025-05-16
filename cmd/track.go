@@ -3,6 +3,7 @@ package cmd
 import (
         "os"
         "path/filepath"
+        "strings"
 
         "github.com/dotpilot/core"
         "github.com/dotpilot/utils"
