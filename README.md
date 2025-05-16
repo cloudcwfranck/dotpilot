@@ -61,12 +61,32 @@ DotPilot is a cross-platform CLI tool for managing and syncing dotfiles across m
 
 3. Test the progress indicators:
    ```bash
+   # Run the simple progress indicator test
    go run test_progress.go
+   
+   # Run the comprehensive demo (great for recording a demo GIF)
+   go run demo.go
    ```
 
-4. Run the full test suite:
+4. Run the test suite:
    ```bash
+   # Run all tests
    go test ./...
+   
+   # Run just the progress indicator tests
+   go test ./utils -run TestProgress
+   ```
+
+5. Create a screencast or GIF of the progress indicators:
+   ```bash
+   # On macOS with Homebrew
+   brew install asciinema
+   asciinema rec -t "DotPilot Progress Indicators" demo.cast
+   asciinema play demo.cast
+   
+   # Convert to GIF (requires gifski)
+   brew install gifski
+   asciicast2gif demo.cast demo.gif
    ```
 
 ## Usage
